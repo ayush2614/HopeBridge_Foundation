@@ -1,11 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 import { MapPin, Phone, Mail, Facebook, Twitter, Instagram, Linkedin, Send, Loader2 } from "lucide-react";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 export default function Contact() {
+  const { t } = useTranslation();
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [loading, setLoading] = useState(false);
   const onChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
@@ -13,16 +15,16 @@ export default function Contact() {
   const submit = async (e) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.message) {
-      toast.error("Please fill in your name, email and message.");
+      toast.error(t("contact.incomplete"));
       return;
     }
     setLoading(true);
     try {
       await axios.post(`${API}/contact`, form);
-      toast.success("Message sent! We'll reply soon.");
+      toast.success(t("contact.success"));
       setForm({ name: "", email: "", subject: "", message: "" });
     } catch (err) {
-      toast.error(err?.response?.data?.detail || "Could not send message.");
+      toast.error(err?.response?.data?.detail || t("contact.incomplete"));
     } finally {
       setLoading(false);
     }
@@ -35,11 +37,11 @@ export default function Contact() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           <div className="lg:col-span-5">
-            <p className="font-inter text-xs uppercase tracking-[0.25em] text-green-600 font-semibold mb-4">Contact</p>
+            <p className="font-inter text-xs uppercase tracking-[0.25em] text-green-600 font-semibold mb-4">{t("contact.eyebrow")}</p>
             <h2 className="font-poppins text-3xl md:text-5xl font-bold text-slate-900 tracking-tight leading-[1.1]">
-              Let's build the bridge — together.
+              {t("contact.title")}
             </h2>
-            <p className="mt-4 font-inter text-slate-600">Have a question, partnership idea or just want to say hi? We'd love to hear from you.</p>
+            <p className="mt-4 font-inter text-slate-600">{t("contact.subtitle")}</p>
 
             <ul className="mt-8 space-y-5">
               <li className="flex items-start gap-4">
@@ -47,8 +49,8 @@ export default function Contact() {
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="font-poppins font-semibold text-slate-900">Address</p>
-                  <p className="text-sm font-inter text-slate-600">42 Hope Street, Andheri West, Mumbai 400058, Maharashtra</p>
+                  <p className="font-poppins font-semibold text-slate-900">{t("contact.address")}</p>
+                  <p className="text-sm font-inter text-slate-600">{t("contact.addrValue")}</p>
                 </div>
               </li>
               <li className="flex items-start gap-4">
@@ -56,8 +58,8 @@ export default function Contact() {
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="font-poppins font-semibold text-slate-900">Phone</p>
-                  <p className="text-sm font-inter text-slate-600">+91 98765 43210</p>
+                  <p className="font-poppins font-semibold text-slate-900">{t("contact.phone")}</p>
+                  <p className="text-sm font-inter text-slate-600">{t("contact.phoneValue")}</p>
                 </div>
               </li>
               <li className="flex items-start gap-4">
@@ -65,8 +67,8 @@ export default function Contact() {
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="font-poppins font-semibold text-slate-900">Email</p>
-                  <p className="text-sm font-inter text-slate-600">hello@hopebridge.org</p>
+                  <p className="font-poppins font-semibold text-slate-900">{t("contact.email")}</p>
+                  <p className="text-sm font-inter text-slate-600">{t("contact.emailValue")}</p>
                 </div>
               </li>
             </ul>
@@ -102,10 +104,10 @@ export default function Contact() {
 
           <form onSubmit={submit} data-testid="contact-form" className="lg:col-span-7 bg-slate-50 rounded-3xl p-8 md:p-10 border border-slate-100 self-start">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <input data-testid="contact-name" name="name" value={form.name} onChange={onChange} placeholder="Your name *" className={input} required />
-              <input data-testid="contact-email" type="email" name="email" value={form.email} onChange={onChange} placeholder="Your email *" className={input} required />
-              <input data-testid="contact-subject" name="subject" value={form.subject} onChange={onChange} placeholder="Subject" className={`md:col-span-2 ${input}`} />
-              <textarea data-testid="contact-message" name="message" value={form.message} onChange={onChange} rows={6} placeholder="Your message *" className={`md:col-span-2 ${input} resize-none`} required />
+              <input data-testid="contact-name" name="name" value={form.name} onChange={onChange} placeholder={t("contact.formName")} className={input} required />
+              <input data-testid="contact-email" type="email" name="email" value={form.email} onChange={onChange} placeholder={t("contact.formEmail")} className={input} required />
+              <input data-testid="contact-subject" name="subject" value={form.subject} onChange={onChange} placeholder={t("contact.formSubject")} className={`md:col-span-2 ${input}`} />
+              <textarea data-testid="contact-message" name="message" value={form.message} onChange={onChange} rows={6} placeholder={t("contact.formMessage")} className={`md:col-span-2 ${input} resize-none`} required />
             </div>
             <button
               type="submit"
@@ -114,7 +116,7 @@ export default function Contact() {
               className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-blue-700 hover:bg-blue-800 text-white px-8 py-4 font-poppins font-medium shadow-lg transition-all hover:-translate-y-0.5 disabled:opacity-60"
             >
               {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
-              {loading ? "Sending…" : "Send Message"}
+              {loading ? t("contact.submitting") : t("contact.submit")}
             </button>
           </form>
         </div>

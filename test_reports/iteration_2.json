@@ -1,0 +1,43 @@
+{
+  "summary": "Iteration 2 testing complete. Ran 29 pytest backend tests (28 passed, 1 skipped by design — replaced with a manual paid-tx simulation via direct Mongo write which then produced a real %PDF-1.4 binary of 2622 bytes with Content-Type: application/pdf). Playwright tested: home page + UPI QR render, EN↔HI i18n switch on hero headline (Empowering ↔ सशक्त), /admin route-guard redirect, admin login (wrong pw → error toast; correct pw → dashboard), all 5 dashboard tabs (stats/volunteers/contacts/newsletter/donations) render with data, admin-logout clears session (re-visiting /admin redirects to /admin/login), and DonationSuccess page (invalid session_id → 'Something went wrong / Transaction not found' error state). All 5 iteration-2 features and all iteration-1 regressions verified working.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/donations/status/{session_id}", "issue": "Response echoes Stripe's live payment_status even when local DB already has payment_status='paid'. If DB says paid but Stripe still shows 'unpaid' (e.g., manually-marked test data), the response returns 'unpaid', so front-end never enters 'paid' branch to show the certificate button. Not a real-world bug (real Stripe checkout would already have paid=true on both sides) — just a test-observability issue."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "AdminDashboard header", "issue": "Sonner 'Welcome back!' toast (position=top-right) briefly overlaps the Logout button after login. Cosmetic, does not block the click (Logout still worked in test).", "selector": "[data-testid=admin-logout]", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Optional: in /api/donations/status/{session_id}, prefer local DB payment_status when it is already 'paid' (short-circuit before hitting Stripe) so the response is stable even if Stripe session state drifts. Purely optional — real-world flow works correctly.",
+    "Optional: in AdminDashboard, add pr-40 (or similar) to the header container so the sonner top-right toast doesn't overlap the Logout button on small viewports."
+  ],
+  "critical_code_review_comments": [
+    "server.py is now ~630 lines — approaching the 700-line split threshold. Consider splitting into modules: auth.py (JWT + login + get_current_admin), admin_routes.py, donations.py, pdf.py, email.py.",
+    "download_certificate: correctly rejects unpaid (400) and missing (404) sessions and returns real application/pdf binary (verified %PDF-1.4). Good.",
+    "Auth: bcrypt-hashed passwords ($2b$ format), JWT HS256 with 8h expiry, role check ('admin') enforced via Depends(get_current_admin), and admins projection excludes password_hash — clean. Startup seed_admin is idempotent AND rotates the password if the env value changes (line 605-611) — matches the playbook. ObjectId is excluded via {\"_id\":0} everywhere.",
+    "Email side-effect uses asyncio.create_task + send_email_safe which skips silently when RESEND_API_KEY is empty (verified: volunteer POST still returns 200 with empty key). Good.",
+    "Public /api/config exposes only upi_id + upi_payee_name — no secret leakage. Good.",
+    "Frontend: RequireAdmin route guard uses loading state to avoid a flash of the login page during token validation — correct pattern. localStorage token cleared on logout AND on 401 during /auth/me. Good.",
+    "i18n covers all user-facing strings across en + hi with 320-line bundle — Hindi headline correctly renders सशक्त. Good."
+  ],
+  "updated_files": [
+    "/app/backend/tests/backend_test.py (expanded from 15 to 29 tests: added TestPublicConfig, TestAuth (6 tests), TestAdmin (8 tests, 5 parameterized), TestDonations.test_certificate_not_found + test_certificate_not_paid_returns_400 + test_certificate_pdf_when_paid)"
+  ],
+  "success_rate": {"backend": "100% (28/28 executed; 1 conditional-skip)", "frontend": "100% - all 5 iteration-2 features + all iteration-1 regressions pass"},
+  "test_credentials": "Admin: admin@hopebridge.org / HopeBridge@2026 (seeded via startup event, verified via /api/auth/login and /api/auth/me)",
+  "seed_data_creation": "Created TEST_-prefixed volunteer/contact/newsletter records via API. Directly marked one payment_transactions doc as paid via Mongo (session_id=cs_test_a1ope...D9j74Y3xhaHrzhiQ0xzb2J, receipt_number=HB-TEST-99999) to verify the 80G PDF certificate endpoint returns a real %PDF-1.4 binary (2622 bytes) with Content-Type: application/pdf. Left in DB — visible as the top 'paid' row on the Donations admin tab.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Backend tests at /app/backend/tests/backend_test.py — module-scoped admin_token fixture. Run: `cd /app && python -m pytest /app/backend/tests/backend_test.py -v`. To exercise the PDF-when-paid path end-to-end, directly patch a payment_transactions doc: set payment_status='paid' AND receipt_number='HB-TEST-…'; then GET /api/donations/certificate/<session_id> returns application/pdf. Note: /api/donations/status/{session_id} always consults live Stripe, so a manually-flipped DB row will still show 'unpaid' in the status endpoint response even though the DB says 'paid' and the certificate endpoint succeeds — that's a test-env quirk, not a bug.",
+  "rca of the issue": "No blocking bugs found."
+}

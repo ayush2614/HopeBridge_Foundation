@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import {
   Accordion,
   AccordionContent,
@@ -5,55 +6,31 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const FAQS = [
-  {
-    q: "How can I volunteer with HopeBridge Foundation?",
-    a: "Fill out the volunteer form on this page. Our team reviews applications weekly and will get in touch within 3–5 business days with role options that fit your skills and availability.",
-  },
-  {
-    q: "Are my donations tax-deductible?",
-    a: "Yes. HopeBridge is a registered nonprofit under Section 12A. All donations from Indian residents are eligible for 80G tax exemption. A certificate is emailed to you within 7 days of your donation.",
-  },
-  {
-    q: "How do you ensure transparency and accountability?",
-    a: "We publish annual impact reports, audited financial statements, and program-wise expense breakdowns on our website. Independent auditors review our books every year.",
-  },
-  {
-    q: "Can I donate in currencies other than INR?",
-    a: "Currently, our Stripe-powered donation flow accepts INR. For international donations, please contact us at donate@hopebridge.org and we'll share options.",
-  },
-  {
-    q: "Can my company partner with HopeBridge for CSR?",
-    a: "Absolutely. We work with companies to design meaningful CSR programs across education, healthcare and environment. Reach out via the contact form to explore a partnership.",
-  },
-  {
-    q: "Where do you currently operate?",
-    a: "We're active across 50+ villages and 8 urban centers spanning Maharashtra, Delhi NCR, Bihar, Odisha and Karnataka, with growing chapters in Tamil Nadu and West Bengal.",
-  },
-];
+const QKEYS = ["q1", "q2", "q3", "q4", "q5", "q6"];
 
 export default function FAQ() {
+  const { t } = useTranslation();
   return (
     <section id="faq" data-testid="faq-section" className="py-24 md:py-32 bg-slate-50">
       <div className="max-w-4xl mx-auto px-6 lg:px-10">
         <div className="text-center mb-14">
-          <p className="font-inter text-xs uppercase tracking-[0.25em] text-green-600 font-semibold mb-4">FAQ</p>
-          <h2 className="font-poppins text-3xl md:text-5xl font-bold text-slate-900 tracking-tight">Questions, answered.</h2>
+          <p className="font-inter text-xs uppercase tracking-[0.25em] text-green-600 font-semibold mb-4">{t("faq.eyebrow")}</p>
+          <h2 className="font-poppins text-3xl md:text-5xl font-bold text-slate-900 tracking-tight">{t("faq.title")}</h2>
         </div>
 
         <Accordion type="single" collapsible className="space-y-4" data-testid="faq-accordion">
-          {FAQS.map((item, i) => (
+          {QKEYS.map((qk, i) => (
             <AccordionItem
-              key={i}
+              key={qk}
               value={`item-${i}`}
               data-testid={`faq-item-${i}`}
               className="bg-white rounded-2xl border border-slate-100 px-6 shadow-[0_4px_20px_rgb(0,0,0,0.03)]"
             >
               <AccordionTrigger className="text-left font-poppins font-semibold text-slate-900 py-5 hover:no-underline">
-                {item.q}
+                {t(`faq.${qk}`)}
               </AccordionTrigger>
               <AccordionContent className="text-slate-600 font-inter leading-relaxed pb-5">
-                {item.a}
+                {t(`faq.${qk.replace("q", "a")}`)}
               </AccordionContent>
             </AccordionItem>
           ))}

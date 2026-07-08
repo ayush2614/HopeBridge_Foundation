@@ -1,17 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import CountUp from "react-countup";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { HeartHandshake, GraduationCap, Users, Sprout, MapPin } from "lucide-react";
 
 const STATS = [
-  { icon: HeartHandshake, end: 50000, label: "Lives Impacted", suffix: "+" },
-  { icon: GraduationCap, end: 10000, label: "Students Supported", suffix: "+" },
-  { icon: Users, end: 500, label: "Volunteers", suffix: "+" },
-  { icon: Sprout, end: 200, label: "Community Programs", suffix: "+" },
-  { icon: MapPin, end: 50, label: "Villages Reached", suffix: "+" },
+  { key: "s1", icon: HeartHandshake, end: 50000, suffix: "+" },
+  { key: "s2", icon: GraduationCap, end: 10000, suffix: "+" },
+  { key: "s3", icon: Users, end: 500, suffix: "+" },
+  { key: "s4", icon: Sprout, end: 200, suffix: "+" },
+  { key: "s5", icon: MapPin, end: 50, suffix: "+" },
 ];
 
 export default function Impact() {
+  const { t } = useTranslation();
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
 
@@ -35,9 +37,9 @@ export default function Impact() {
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <p className="font-inter text-xs uppercase tracking-[0.25em] text-green-300 font-semibold mb-4">Our Impact</p>
-          <h2 className="font-poppins text-3xl md:text-5xl font-bold tracking-tight">Change you can measure.</h2>
-          <p className="mt-4 text-white/70 font-inter">Every number represents a story of hope, resilience and transformation.</p>
+          <p className="font-inter text-xs uppercase tracking-[0.25em] text-green-300 font-semibold mb-4">{t("impact.eyebrow")}</p>
+          <h2 className="font-poppins text-3xl md:text-5xl font-bold tracking-tight">{t("impact.title")}</h2>
+          <p className="mt-4 text-white/70 font-inter">{t("impact.subtitle")}</p>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
@@ -45,8 +47,8 @@ export default function Impact() {
             const Icon = s.icon;
             return (
               <motion.div
-                key={s.label}
-                data-testid={`impact-stat-${s.label.toLowerCase().replace(/\s/g, "-")}`}
+                key={s.key}
+                data-testid={`impact-stat-${s.key}`}
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -59,7 +61,7 @@ export default function Impact() {
                 <div className="font-poppins text-3xl md:text-4xl font-bold text-green-300 tabular-nums">
                   {inView ? <CountUp end={s.end} duration={2.2} separator="," suffix={s.suffix} /> : `0${s.suffix}`}
                 </div>
-                <div className="mt-2 text-sm font-inter text-white/70">{s.label}</div>
+                <div className="mt-2 text-sm font-inter text-white/70">{t(`impact.${s.key}`)}</div>
               </motion.div>
             );
           })}

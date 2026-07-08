@@ -1,13 +1,15 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { Target, Eye } from "lucide-react";
 
 export default function MissionVision() {
+  const { t } = useTranslation();
   return (
     <section id="mission" data-testid="mission-section" className="relative py-24 md:py-32 bg-slate-50">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <p className="font-inter text-xs uppercase tracking-[0.25em] text-green-600 font-semibold mb-4">Our North Star</p>
-          <h2 className="font-poppins text-3xl md:text-5xl font-bold text-slate-900 tracking-tight">Mission &amp; Vision</h2>
+          <p className="font-inter text-xs uppercase tracking-[0.25em] text-green-600 font-semibold mb-4">{t("mission.eyebrow")}</p>
+          <h2 className="font-poppins text-3xl md:text-5xl font-bold text-slate-900 tracking-tight">{t("mission.title")}</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10">
@@ -24,13 +26,9 @@ export default function MissionVision() {
               <div className="w-14 h-14 rounded-2xl bg-blue-700 text-white grid place-items-center mb-6">
                 <Target className="w-6 h-6" />
               </div>
-              <p className="font-inter uppercase text-xs tracking-[0.2em] text-blue-700 font-semibold">Mission</p>
-              <h3 className="mt-3 font-poppins text-2xl md:text-3xl font-semibold text-slate-900 leading-snug">
-                To empower underprivileged communities through sustainable programs that create long-term social impact.
-              </h3>
-              <p className="mt-4 font-inter text-slate-600 leading-relaxed">
-                We invest in people — not just projects — so change endures long after the volunteers have gone home.
-              </p>
+              <p className="font-inter uppercase text-xs tracking-[0.2em] text-blue-700 font-semibold">{t("mission.missionLabel")}</p>
+              <h3 className="mt-3 font-poppins text-2xl md:text-3xl font-semibold text-slate-900 leading-snug">{t("mission.missionText")}</h3>
+              <p className="mt-4 font-inter text-slate-600 leading-relaxed">{t("mission.missionSub")}</p>
             </div>
           </motion.div>
 
@@ -47,13 +45,9 @@ export default function MissionVision() {
               <div className="w-14 h-14 rounded-2xl bg-green-600 text-white grid place-items-center mb-6">
                 <Eye className="w-6 h-6" />
               </div>
-              <p className="font-inter uppercase text-xs tracking-[0.2em] text-green-700 font-semibold">Vision</p>
-              <h3 className="mt-3 font-poppins text-2xl md:text-3xl font-semibold text-slate-900 leading-snug">
-                A world where every individual has equal access to education, healthcare, and opportunities.
-              </h3>
-              <p className="mt-4 font-inter text-slate-600 leading-relaxed">
-                We imagine — and are actively building — a future defined by dignity, opportunity and hope for all.
-              </p>
+              <p className="font-inter uppercase text-xs tracking-[0.2em] text-green-700 font-semibold">{t("mission.visionLabel")}</p>
+              <h3 className="mt-3 font-poppins text-2xl md:text-3xl font-semibold text-slate-900 leading-snug">{t("mission.visionText")}</h3>
+              <p className="mt-4 font-inter text-slate-600 leading-relaxed">{t("mission.visionSub")}</p>
             </div>
           </motion.div>
         </div>

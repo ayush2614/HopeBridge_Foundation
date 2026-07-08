@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const IMAGES = [
   {
@@ -39,18 +40,19 @@ const IMAGES = [
 ];
 
 export default function Gallery() {
+  const { t } = useTranslation();
   return (
     <section id="gallery" data-testid="gallery-section" className="py-24 md:py-32 bg-slate-50">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div className="max-w-xl">
-            <p className="font-inter text-xs uppercase tracking-[0.25em] text-green-600 font-semibold mb-4">Gallery</p>
+            <p className="font-inter text-xs uppercase tracking-[0.25em] text-green-600 font-semibold mb-4">{t("gallery.eyebrow")}</p>
             <h2 className="font-poppins text-3xl md:text-5xl font-bold text-slate-900 tracking-tight leading-[1.1]">
-              Moments that move us forward.
+              {t("gallery.title")}
             </h2>
           </div>
           <p className="font-inter text-slate-600 max-w-md">
-            A glimpse into the classrooms, camps and communities we serve every single week.
+            {t("gallery.subtitle")}
           </p>
         </div>
 

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { HandHeart, ArrowRight, Sparkles } from "lucide-react";
 
 const HERO_IMG =
@@ -10,6 +11,7 @@ const scrollTo = (id) => {
 };
 
 export default function Hero() {
+  const { t } = useTranslation();
   return (
     <section id="home" data-testid="hero-section" className="relative min-h-[92vh] flex items-center overflow-hidden">
       <div className="absolute inset-0">
@@ -27,7 +29,7 @@ export default function Hero() {
           >
             <Sparkles className="w-4 h-4 text-green-300" />
             <span className="text-xs md:text-sm font-inter uppercase tracking-[0.2em] text-green-200">
-              A brighter tomorrow, together
+              {t("hero.eyebrow")}
             </span>
           </motion.div>
 
@@ -38,8 +40,10 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="font-poppins text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]"
           >
-            Empowering Communities,{" "}
-            <span className="bg-gradient-to-r from-green-300 to-emerald-200 bg-clip-text text-transparent">Transforming Lives</span>
+            {t("hero.title1")}{" "}
+            <span className="bg-gradient-to-r from-green-300 to-emerald-200 bg-clip-text text-transparent">
+              {t("hero.title2")}
+            </span>
           </motion.h1>
 
           <motion.p
@@ -48,7 +52,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.25 }}
             className="mt-6 max-w-2xl font-inter text-base md:text-lg text-slate-200/90 leading-relaxed"
           >
-            Together we create opportunities through education, healthcare, environmental sustainability, and community development.
+            {t("hero.subtitle")}
           </motion.p>
 
           <motion.div
@@ -62,7 +66,7 @@ export default function Hero() {
               onClick={() => scrollTo("volunteer")}
               className="group rounded-full bg-green-600 hover:bg-green-700 text-white px-7 py-4 font-poppins font-medium inline-flex items-center gap-2 shadow-lg transition-all duration-300 hover:-translate-y-0.5"
             >
-              <HandHeart className="w-5 h-5" /> Become a Volunteer
+              <HandHeart className="w-5 h-5" /> {t("hero.volunteerCta")}
               <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
             </button>
             <button
@@ -70,7 +74,7 @@ export default function Hero() {
               onClick={() => scrollTo("donate")}
               className="rounded-full bg-white text-slate-900 hover:bg-slate-100 px-7 py-4 font-poppins font-medium shadow-lg inline-flex items-center gap-2 transition-all duration-300 hover:-translate-y-0.5"
             >
-              Donate Now <ArrowRight className="w-4 h-4" />
+              {t("hero.donateCta")} <ArrowRight className="w-4 h-4" />
             </button>
           </motion.div>
 
@@ -81,9 +85,9 @@ export default function Hero() {
             className="mt-12 flex flex-wrap gap-8 text-white/85"
           >
             {[
-              ["50K+", "Lives Impacted"],
-              ["500+", "Volunteers"],
-              ["50+", "Villages"],
+              ["50K+", t("hero.stat1")],
+              ["500+", t("hero.stat2")],
+              ["50+", t("hero.stat3")],
             ].map(([n, l]) => (
               <div key={l}>
                 <div className="font-poppins text-3xl font-bold text-green-300">{n}</div>

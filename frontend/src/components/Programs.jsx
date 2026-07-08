@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { Laptop, BookOpen, HeartPulse, UtensilsCrossed, TreePine, Wrench } from "lucide-react";
 
 const PROGRAMS = [
-  { icon: Laptop, title: "Digital Literacy", desc: "Free computer & smartphone training for youth and elders.", accent: "blue" },
-  { icon: BookOpen, title: "Free Education Support", desc: "After-school tuition, learning kits and scholarships.", accent: "green" },
-  { icon: HeartPulse, title: "Health Camps", desc: "Free check-ups, medicines and specialist consultations.", accent: "blue" },
-  { icon: UtensilsCrossed, title: "Food Distribution", desc: "Weekly meal drives serving families in need.", accent: "green" },
-  { icon: TreePine, title: "Tree Plantation", desc: "Community-led plantation and reforestation drives.", accent: "green" },
-  { icon: Wrench, title: "Skill Development Workshops", desc: "Trade skills, entrepreneurship and job placement.", accent: "blue" },
+  { key: "p1", icon: Laptop, accent: "blue" },
+  { key: "p2", icon: BookOpen, accent: "green" },
+  { key: "p3", icon: HeartPulse, accent: "blue" },
+  { key: "p4", icon: UtensilsCrossed, accent: "green" },
+  { key: "p5", icon: TreePine, accent: "green" },
+  { key: "p6", icon: Wrench, accent: "blue" },
 ];
 
 const accentClass = {
@@ -16,20 +17,17 @@ const accentClass = {
 };
 
 export default function Programs() {
+  const { t } = useTranslation();
   return (
     <section id="programs" data-testid="programs-section" className="relative py-24 md:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-16">
           <div className="lg:col-span-6">
-            <p className="font-inter text-xs uppercase tracking-[0.25em] text-green-600 font-semibold mb-4">What We Do</p>
-            <h2 className="font-poppins text-3xl md:text-5xl font-bold text-slate-900 tracking-tight leading-[1.1]">
-              Programs designed for lasting change.
-            </h2>
+            <p className="font-inter text-xs uppercase tracking-[0.25em] text-green-600 font-semibold mb-4">{t("programs.eyebrow")}</p>
+            <h2 className="font-poppins text-3xl md:text-5xl font-bold text-slate-900 tracking-tight leading-[1.1]">{t("programs.title")}</h2>
           </div>
           <div className="lg:col-span-6 lg:pt-4">
-            <p className="font-inter text-base md:text-lg text-slate-600 leading-relaxed">
-              Every program we run is built on the same principle: sustainable, community-owned impact. We work with local leaders, teachers, medical professionals and volunteers to make sure our efforts outlast us.
-            </p>
+            <p className="font-inter text-base md:text-lg text-slate-600 leading-relaxed">{t("programs.body")}</p>
           </div>
         </div>
 
@@ -38,8 +36,8 @@ export default function Programs() {
             const Icon = p.icon;
             return (
               <motion.article
-                key={p.title}
-                data-testid={`program-card-${p.title.toLowerCase().replace(/\s/g, "-")}`}
+                key={p.key}
+                data-testid={`program-card-${p.key}`}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
@@ -49,8 +47,8 @@ export default function Programs() {
                 <div className={`w-14 h-14 rounded-2xl grid place-items-center transition-colors duration-300 ${accentClass[p.accent]}`}>
                   <Icon className="w-6 h-6" />
                 </div>
-                <h3 className="mt-6 font-poppins text-xl font-semibold text-slate-900">{p.title}</h3>
-                <p className="mt-3 text-sm font-inter text-slate-600 leading-relaxed">{p.desc}</p>
+                <h3 className="mt-6 font-poppins text-xl font-semibold text-slate-900">{t(`programs.${p.key}`)}</h3>
+                <p className="mt-3 text-sm font-inter text-slate-600 leading-relaxed">{t(`programs.${p.key}d`)}</p>
               </motion.article>
             );
           })}
