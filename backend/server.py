@@ -114,9 +114,11 @@ async def send_email_safe(to: str, subject: str, html: str) -> Optional[str]:
         resend.api_key = RESEND_API_KEY
         params = {"from": SENDER_EMAIL, "to": [to], "subject": subject, "html": html}
         result = await asyncio.to_thread(resend.Emails.send, params)
-        return result.get("id") if isinstance(result, dict) else None
+        eid = result.get("id") if isinstance(result, dict) else None
+        logging.info(f"[email sent id={eid}] to={to} subject={subject!r}")
+        return eid
     except Exception as e:
-        logging.exception(f"Email send failed: {e}")
+        logging.exception(f"Email send failed to={to} subject={subject!r}: {e}")
         return None
 
 
