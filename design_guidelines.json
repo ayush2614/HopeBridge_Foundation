@@ -1,0 +1,129 @@
+{
+  "theme": "Earthy & Swiss High-Contrast Hybrid (Trustworthy NGO)",
+  "typography": {
+    "fonts": {
+      "headings": "Poppins",
+      "body": "Inter",
+      "import_instructions": "Import both from Google Fonts in index.css: @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap');"
+    },
+    "rules": {
+      "H1": "font-poppins text-5xl md:text-6xl font-bold tracking-tight text-slate-900 leading-[1.1]",
+      "H2": "font-poppins text-3xl md:text-4xl font-semibold tracking-tight text-slate-900",
+      "H3": "font-poppins text-xl md:text-2xl font-medium text-slate-800",
+      "overlines": "font-inter text-sm font-semibold uppercase tracking-[0.2em] text-green-600",
+      "body": "font-inter text-base text-slate-600 leading-relaxed"
+    }
+  },
+  "colors": {
+    "background": "bg-slate-50",
+    "surface": "bg-white",
+    "primary": "bg-blue-700 hover:bg-blue-800 text-white transition-colors",
+    "secondary": "bg-green-600 hover:bg-green-700 text-white transition-colors",
+    "text_main": "text-slate-900",
+    "text_muted": "text-slate-500",
+    "border": "border-slate-200"
+  },
+  "visual_enhancers": {
+    "glassmorphism": "backdrop-blur-xl bg-white/90 border-b border-slate-200 shadow-sm",
+    "cards": "bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-8 transition-transform hover:-translate-y-1",
+    "hero_overlay": "bg-gradient-to-r from-slate-900/90 via-slate-900/60 to-slate-900/30",
+    "buttons": "rounded-full px-8 py-4 font-poppins font-medium transition-all duration-300 hover:-translate-y-1 hover:shadow-lg inline-flex items-center justify-center"
+  },
+  "layouts": {
+    "spacing": "Use p-8, p-12, p-24 for section paddings. Generous breathing room.",
+    "hero": "min-h-[90vh] flex items-center relative overflow-hidden",
+    "about_bento": "grid grid-cols-1 md:grid-cols-12 gap-6. Intro spans 12 or 5, cards span 7 in a sub-grid.",
+    "programs_grid": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8",
+    "impact_grid": "grid grid-cols-2 md:grid-cols-5 gap-6 text-center",
+    "gallery_grid": "grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[250px]"
+  },
+  "motion": {
+    "libraries_to_install": [
+      "framer-motion",
+      "react-countup",
+      "lucide-react"
+    ],
+    "rules": [
+      "Staggered fade-up entrances for cards using framer-motion.",
+      "Parallax effect on hero background image.",
+      "Hover scale on gallery images (hover:scale-105 transition-transform duration-500).",
+      "CountUp animation for Impact statistics when in view.",
+      "Always respect prefers-reduced-motion."
+    ]
+  },
+  "components_instructions": {
+    "header": "Sticky top-0 z-50 with crystal glassmorphism. Navigation links MUST be visible on desktop. Include CTA 'Donate Now' button.",
+    "hero": "Full width image background, heavy gradient overlay on left for text readability. H1, Subheading, and two buttons ('Become a Volunteer', 'Donate Now').",
+    "about": "Bento grid approach. 4 feature cards (Education, Healthcare, Women Empowerment, Environment) using lucide-react icons.",
+    "impact_stats": "Use react-countup inside a framer-motion in-view trigger. Large typography for numbers, green-600 color for emphasis.",
+    "volunteer_form": "Modern input fields with generous padding. 2-column layout on desktop.",
+    "donate_section": "Selectable cards for ₹500, ₹1000, ₹2500, Custom. Use lucide-react QrCode icon for the QR placeholder. 'Donate Securely' prominent button.",
+    "faq": "Build an accordion layout.",
+    "testimonials": "Grid of 4 clean cards. Include avatar image, rating stars (lucide-react Star), and quote.",
+    "footer": "Dark background (bg-slate-900 text-slate-300). 4-column layout with quick links, contact, newsletter."
+  },
+  "image_urls": {
+    "hero": {
+      "url": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzOTB8MHwxfHNlYXJjaHwzfHx2b2x1bnRlZXJzJTIwaGVscGluZyUyMGNoaWxkcmVufGVufDB8fHx8MTc4MzUzMDg4MXww&ixlib=rb-4.1.0&q=85",
+      "description": "Smiling children doing peace signs"
+    },
+    "about_features": [
+      {
+        "category": "Education",
+        "url": "https://images.pexels.com/photos/18506736/pexels-photo-18506736.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      },
+      {
+        "category": "Healthcare",
+        "url": "https://images.unsplash.com/photo-1659353888906-adb3e0041693?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2OTF8MHwxfHNlYXJjaHwyfHxtZWRpY2FsJTIwY2FtcCUyMGRvY3RvcnxlbnwwfHx8fDE3ODM1MzA4ODF8MA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "category": "Women Empowerment",
+        "url": "https://images.unsplash.com/photo-1774504798113-a03e2aa24789?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA0MTJ8MHwxfHNlYXJjaHwyfHx3b21lbiUyMGNvbW11bml0eSUyMHdvcmtpbmd8ZW58MHx8fHwxNzgzNTMwODgxfDA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "category": "Environment",
+        "url": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwxfHxwbGFudGluZyUyMHRyZWUlMjBoYW5kc3xlbnwwfHx8fDE3ODM1MzA4ODF8MA&ixlib=rb-4.1.0&q=85"
+      }
+    ],
+    "programs": [
+      {
+        "category": "Food Distribution",
+        "url": "https://images.pexels.com/photos/6995301/pexels-photo-6995301.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      },
+      {
+        "category": "Tree Plantation",
+        "url": "https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwyfHxwbGFudGluZyUyMHRyZWUlMjBoYW5kc3xlbnwwfHx8fDE3ODM1MzA4ODF8MA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "category": "Digital Literacy",
+        "url": "https://images.unsplash.com/photo-1610484826967-09c5720778c7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MTN8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwbGl0ZXJhY3klMjBsZWFybmluZ3xlbnwwfHx8fDE3ODM1MzA4OTN8MA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "category": "Skill Development",
+        "url": "https://images.unsplash.com/photo-1646579886135-068c73800308?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzZ8MHwxfHNlYXJjaHwxfHxza2lsbCUyMGRldmVsb3BtZW50JTIwd29ya3Nob3B8ZW58MHx8fHwxNzgzNTMwODkzfDA&ixlib=rb-4.1.0&q=85"
+      }
+    ],
+    "testimonials": [
+      "https://images.unsplash.com/photo-1580489944761-15a19d654956?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njl8MHwxfHNlYXJjaHwxfHxzbWlsaW5nJTIwcGVyc29uJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzgzNTMwODgxfDA&ixlib=rb-4.1.0&q=85",
+      "https://images.unsplash.com/photo-1662850886700-4ec19bd30d11?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njl8MHwxfHNlYXJjaHwzfHxzbWlsaW5nJTIwcGVyc29uJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzgzNTMwODgxfDA&ixlib=rb-4.1.0&q=85",
+      "https://images.pexels.com/photos/3228887/pexels-photo-3228887.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "https://images.unsplash.com/photo-1611695434369-a8f5d76ceb7b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njl8MHwxfHNlYXJjaHw0fHxzbWlsaW5nJTIwcGVyc29uJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzgzNTMwODgxfDA&ixlib=rb-4.1.0&q=85"
+    ],
+    "gallery": [
+      "https://images.unsplash.com/photo-1628717341663-0007b0ee2597?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzOTB8MHwxfHNlYXJjaHwxfHx2b2x1bnRlZXJzJTIwaGVscGluZyUyMGNoaWxkcmVufGVufDB8fHx8MTc4MzUzMDg4MXww&ixlib=rb-4.1.0&q=85",
+      "https://images.pexels.com/photos/11490708/pexels-photo-11490708.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "https://images.unsplash.com/photo-1599059813005-11265ba4b4ce?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njl8MHwxfHNlYXJjaHwxfHxmb29kJTIwZGlzdHJpYnV0aW9uJTIwY2hhcml0eXxlbnwwfHx8fDE3ODM1MzA4ODF8MA&ixlib=rb-4.1.0&q=85",
+      "https://images.unsplash.com/photo-1593113598332-cd288d649433?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzOTB8MHwxfHNlYXJjaHwyfHx2b2x1bnRlZXJzJTIwaGVscGluZyUyMGNoaWxkcmVufGVufDB8fHx8MTc4MzUzMDg4MXww&ixlib=rb-4.1.0&q=85"
+    ]
+  },
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. Avoid this: make creative, distinctive frontends that surprise and delight.",
+    "DO NOT use generic centered layouts. Use asymmetry and bento grids.",
+    "Ensure contrast rules are met. Do not use fully transparent navbars. Use glassmorphism.",
+    "Add transition effects to interactive elements (e.g. hover states), but exclude 'all' to prevent breaking transforms.",
+    "Include 'data-testid' attributes on ALL interactive and key informational elements.",
+    "Use generous padding (p-8, p-12, p-16) to create a premium feel.",
+    "DO NOT output placeholder image URLs. Only use the provided URLs.",
+    "Use React (+ Tailwind CSS + Framer Motion). Remember it is a .js environment, so do not output TypeScript (.tsx). Use prop-types or standard js."
+  ]
+}
