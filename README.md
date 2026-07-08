@@ -1,4 +1,4 @@
-# 🌉 HopeBridge Foundation
+# HopeBridge Foundation
 
 A modern and responsive NGO platform designed to connect people with social causes, encourage donations, and create awareness about community initiatives.
 
