@@ -27,7 +27,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </AuthProvider>
-      <Toaster position="top-right" richColors />
+      <Toaster position="bottom-right" richColors />
     </div>
   );
 }
