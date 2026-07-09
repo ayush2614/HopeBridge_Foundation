@@ -3,7 +3,7 @@
 A modern and responsive NGO platform designed to connect people with social causes, encourage donations, and create awareness about community initiatives.
 
 🔗 **Live Preview:**
-https://impact-bridge-org.preview.emergentagent.com/
+https://hopebridge-foundation26.netlify.app/
 
 ---
 
